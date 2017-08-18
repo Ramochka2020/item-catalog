@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include "nav.html" %}
+{% include "flash.html" %}
+
+<!-- Page Content -->
+<section id="showItem" class="section">
+
+    <div class="container">
+
+        <div class="row">
+
+            {% include "categories.html" %}
+
+            <div class="col-md-9">
+                <h6 class="pull-right">
+                    <a href = "{{url_for('delete_Category', category_name = category)}}">Delete Category</a>
+                </h6>
+                 <h2 class="padding-bottom-26">We have (<strong>{{count}}</strong>)Restaurants</h2>
+                {% for i in items %}
+                <div class="thumbnail text-center">
+                    <div class="caption-full">
+                        <img class="img-responsive img-center" src="{{ i.picture }}" alt="{{ i.name }}">
+                    </div>
+                    <a href = "{{url_for('showItem', category_name = i.category.name, item_name = i.name)}}">
+                        <h4>{{ i.name }}</h4>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        
+    </div>
+   
+</section>
+
+
+{% endblock %}
